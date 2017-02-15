@@ -11,47 +11,52 @@ import { FirebaseListObservable, AngularFireDatabase } from 'angularfire2';
 })
 export class HomePage {
 
-  task: FirebaseListObservable<any>;
-  constructor(public navCtrl: NavController,
-  public alertController: AlertController,
-  public database: AngularFireDatabase) {
+  user: FirebaseListObservable<any>;
 
-    this.task = this.database.list('/agenda');
+  constructor(public navCtrl: NavController,
+              public alertController: AlertController,
+              public database: AngularFireDatabase) {
+
+    this.user = this.database.list('/agenda');
   }
+
 createUser(){
   let newUserModal = this.alertController.create({
-  title: "Nuevo Contacto",
-  message: "Agrega un nuevo Contacto",
-  inputs: [
-    {
-      name: "nombre",
-      placeholder: "Nombre"
+    title: "Nuevo Contacto",
+    message: "Agrega un nuevo Contacto",
+    inputs: [
+      {
+        name: "nombre",
+        placeholder: "Nombre"
 
+        },
+        {
+        name: "telefono",
+        placeholder: "Teléfono"
+      }
+      ],
+    buttons: [
+    {
+      text: "Cancelar",
+      handler: data => {
+        console.log('Cancel Clic');
+      }
     },
     {
-      name: "telefono",
-      placeholder: "Teléfono"
+      text: "Guardar",
+      handler: data => {
+      
+        this.user.push({
+          name: data.nombre,
+          phone: data.telefono
+          });
+      }
     }
-  ],
-  buttons: [
-  {
-    text: "Cancelar",
-    handler: data => {
-      console.log('Cancel Clic');
-    }
-  }
-  {
-    text: "Guardar",
-    handler: data -> {
-      this.user.push({
-        name: data.nombre,
-        phone: data.telefono
-        });
-    }
-  }
-  ]
-  })
+    ]
+    });
+
+    newUserModal.present(newUserModal);
 }
-newUserModal.present(newUserModal);
+
 
 }
