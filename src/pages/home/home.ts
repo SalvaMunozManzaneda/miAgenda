@@ -14,8 +14,8 @@ export class HomePage {
 user:  FirebaseListObservable<any>;
 
 constructor(public navCtrl: NavController,
-       public alertController: AlertController,
-         public database: AngularFireDatabase) {
+        public alertController: AlertController,
+        public database: AngularFireDatabase) {
 
  this.user = this.database.list('/agenda');
 
@@ -25,7 +25,7 @@ constructor(public navCtrl: NavController,
 createUser(){
  let newUserModal = this.alertController.create({
    title: "Nuevo Contácto",
-   message: "Agrega aquí un nuevo contácto",
+   message: "Agrega un nuevo contácto",
    inputs: [
      {
        name: "nombre",
