@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color = "primary">
     <ion-title>
       Agenda de Contactos
     </ion-title>
@@ -12,8 +12,24 @@
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+  <ion-list>
+    <ion-item-sliding *ngFor="let u of user | async">
+      //un for para iterar la variable user, async = los carga de manera asincrona
+  		<ion-item>
+  			<ion-label>
+  				<h2>{{ u.name }}</h2>//u es la variable en la base de datos del for de arriba.
+  				<h3>{{ u.phone }}</h3>
+  			</ion-label>
+  		</ion-item>
+  		<ion-item-options>
+  			<button ion-button (click)="updateUser(u)">
+  				Editar
+  			</button>
+  			<button ion-button color="danger"  (click)="removeUser(u)">
+  				Borrar
+  			</button>
+  		</ion-item-options>
+  	</ion-item-sliding>
+  </ion-list>
+
 </ion-content>
