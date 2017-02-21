@@ -57,5 +57,45 @@ createUser(){
  newUserModal.present(newUserModal);
 }
 
+updateUser(u){
+ let updateUserModal = this.alertController.create({
+   title: "Actualizar Contácto",
+   message: "Edita la información de " + u.name,
+   inputs: [
+     {
+       name: "nombre",
+       placeholder: "Nombre",
+       value: u.name
+     },
+     {
+       name:"telefono",
+       placeholder: "Teléfono",
+       value: u.phone
+     }
+   ],
+   buttons:[
+     {
+       text: "Cancelar",
+       handler: data => {
+         console.log('Cancel Clic');
+       }
+     },
+     {
+       text: "Guardar",
+       handler: data => {
+         this.user.update( u.$key, {//es el key de la base de datos (numeros random arriba en firebase.)
+           name: data.nombre,
+           phone: data.telefono
+         });
+       }
+     }
+   ]
+ });
+ updateUserModal.present(updateUserModal);
+}
+
+removeUser(user){//para eliminar el usuario que se le pasa
+  this.user.remove(user);
+}
 
 }
